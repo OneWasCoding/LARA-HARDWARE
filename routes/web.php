@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -71,3 +78,10 @@ Route::controller(ReviewController::class)->group(function () {
     Route::put('/reviews/{review}', 'update')->name('reviews.update');
     Route::delete('/reviews/{review}', 'destroy')->name('reviews.destroy');
 });
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
